@@ -11,8 +11,10 @@ import com.mySpring.autowired.MyBean;
 @MyBean("teacherService")
 @PointCut("com.mySpring.aop.aspect.SurroundAspect")
 public class TeacherService {
+
     @MyAutowired
     private StudentService studentService;
+
     private String name;
 
     public String getName() {

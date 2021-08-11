@@ -10,6 +10,9 @@ import java.lang.reflect.Method;
 
 /**
  * Created by seven on 2018/5/12.
+ *
+ * MethodInterceptor 基于 方法的 拦截器
+ *
  * 获得代理类
  */
 public class AopProxy implements MethodInterceptor {
@@ -34,7 +37,7 @@ public class AopProxy implements MethodInterceptor {
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
 
         Object object = null;
-        //有类注解
+        //有AOP类注解
         if (null != classAdvice) {
             object = ProxyController.doController(o, method, objects, methodProxy, classAdvice);
         } else {

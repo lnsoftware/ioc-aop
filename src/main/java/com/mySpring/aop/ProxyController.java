@@ -14,12 +14,13 @@ import java.lang.reflect.Method;
 
 /**
  * Created by seven on 2018/5/12.
+ *
  * 通过注解判断执行哪个通知
  */
 public class ProxyController {
 
     /**
-     * 没有类注解
+     * 没有PointCut类注解
      *
      * @param o
      * @param method
@@ -29,10 +30,11 @@ public class ProxyController {
      * @throws Throwable
      */
     public static Object doController(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-        //有忽视注解
+        // 有忽视注解
         if (method.isAnnotationPresent(Ignore.class)) {
             return methodProxy.invokeSuper(o, objects);
         }
+
         //没有切入点
         if (!method.isAnnotationPresent(PointCut.class)) {
             return methodProxy.invokeSuper(o, objects);
@@ -44,7 +46,7 @@ public class ProxyController {
     }
 
     /**
-     * 有类注解
+     * 有PointCut类注解
      *
      * @param o
      * @param method
@@ -71,10 +73,13 @@ public class ProxyController {
     }
 
     private static Object doAdvice(Object o, Object[] objects, MethodProxy methodProxy, Advice advice) throws Throwable {
+        // 后置通知
         if (advice instanceof AfterAdvice) {
             return Execute.executeAfter(o, objects, methodProxy, (AfterAdvice) advice);
+        // 前置通知
         } else if (advice instanceof BeforeAdvice) {
             return Execute.executeBefore(o, objects, methodProxy, (BeforeAdvice) advice);
+        // 环绕通知
         } else if (advice instanceof SurroundAdvice) {
             return Execute.executeSurround(o, objects, methodProxy, (SurroundAdvice) advice);
         }

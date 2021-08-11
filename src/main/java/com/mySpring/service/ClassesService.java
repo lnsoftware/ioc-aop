@@ -16,6 +16,7 @@ public class ClassesService {
 
     @MyAutowired
     private TeacherService teacherService;
+
     private String classname;
 
     public String getClassname() {
@@ -32,8 +33,8 @@ public class ClassesService {
         System.out.println(classname);
     }
 
-    @PointCut("com.mySpring.client.BeforeAspect")
-    public void test() {
-        System.out.println("做一下");
-    }
+//    @PointCut("com.mySpring.client.BeforeAspect")
+//    public void test() {
+//        System.out.println("做一下");
+//    }
 }

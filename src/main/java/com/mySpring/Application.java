@@ -15,27 +15,27 @@ import java.io.File;
 public class Application {
     public static void main(String[] args) throws ClassNotFoundException {
         //初始化环境
-        init();
+        //init();
 
         //模拟spring启动
         Class.forName("com.mySpring.autowired.BeanFactory");
 
         ClassesService classesService = (ClassesService) BeanFactory.getBean("classesService");
-        TeacherService teacherService = (TeacherService) BeanFactory.getBean("teacherService");
-        StudentService studentService = (StudentService) BeanFactory.getBean("studentService");
+        //TeacherService teacherService = (TeacherService) BeanFactory.getBean("teacherService");
+        //StudentService studentService = (StudentService) BeanFactory.getBean("studentService");
 
         classesService.showClasses();
-        System.out.println();
+        //System.out.println();
 
-        teacherService.show();
-        System.out.println();
+        //teacherService.show();
+        //System.out.println();
 
-        studentService.show();
+        //studentService.show();
 
     }
 
     private static void init() {
-        String cglibClassPath = "D:\\classes";
+        String cglibClassPath = "C:\\tmp\\classes";
 
         File file = new File(cglibClassPath);
         if (!file.exists()) {

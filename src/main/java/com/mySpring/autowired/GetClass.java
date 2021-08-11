@@ -20,7 +20,10 @@ public class GetClass {
         //从常量工具类里获取
         classpathPackageScanner = new ClasspathPackageScanner(ConstantUtil.PROPERTY_MAP.get(key));
 
+        //　获取 com.mySpring 下面的所有的　class 文件的全限定名
         List<String> list = classpathPackageScanner.getFullyQualifiedClassNameList();
+
+        // 遍历并加载 所有的 class 文件
         List<Class> classList = new ArrayList<Class>();
         for (String string : list) {
             classList.add(Class.forName(string));

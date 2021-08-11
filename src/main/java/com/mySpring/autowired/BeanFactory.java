@@ -31,15 +31,20 @@ public class BeanFactory {
      */
     static {
         //实例化对象bean，填充到map中存储
+        //  ** 重点-1 **
         AutomaticInjection.automaticInjection(KEY, beanMap);
+        // 此时的 beanMap 中还不是 代理 类型，是原始类型
 
         //将实际的bean设置成cglib代理的bean
+        //  ** 重点-2 **
         ProxyFactory.makeProxyBean(beanMap);
+        // 此时的 beanMap 中已经是 cglib 生成的代理类型
 
         //生成代理后重新注入,eg：classesService里面的成员变量teacherService此时是null、需要重新赋值
         for (String key : beanMap.keySet()) {
             Class c = beanMap.get(key).getClass().getSuperclass();
             try {
+                // 重新注入 被 cglib 生成的代理的类
                 AutomaticInjection.reinjection(beanMap, c, beanMap.get(key));
             } catch (Exception e) {
                 e.printStackTrace();

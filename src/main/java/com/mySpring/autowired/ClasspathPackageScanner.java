@@ -49,6 +49,8 @@ public class ClasspathPackageScanner {
      * Get all fully qualified names located in the specified package
      * and its sub-package.
      *
+     * 这里 递归 获取所有的 class 文件的全限定名称
+     *
      * @return A list of fully qualified names.
      * @throws IOException IoC的载入
      */
@@ -59,6 +61,11 @@ public class ClasspathPackageScanner {
 
     /**
      * Actually perform the scanning procedure.
+     * // 递归获取 所有 class 文件的 全路径 名称
+     *  例如
+     *      com.mySpring.aop.advice.Advice
+     *      com.mySpring.aop.advice.AfterAdvice
+     *      ...
      *
      * @param basePackage
      * @param nameList    A list to contain the result.
